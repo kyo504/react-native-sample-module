@@ -25,6 +25,7 @@ public class RNAudioPlayerModule extends ReactContextBaseJavaModule implements M
 
         this.reactContext = reactContext;
         this.mMediaPlayer = new MediaPlayer();
+        this.mMediaPlayer.setOnPreparedListener(this);
     }
 
     @Override
@@ -39,10 +40,9 @@ public class RNAudioPlayerModule extends ReactContextBaseJavaModule implements M
     }
 
     @ReactMethod
-    public void play() {
-        Uri uri = Uri.parse("https://api.soundcloud.com/tracks/302064339/stream?client_id=3ed8237e8a4bfc63db818a732c95bc38");
-
+    public void play(String url) {
         try {
+            Uri uri = Uri.parse(url);
             mMediaPlayer.reset();
             mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mMediaPlayer.setDataSource(uri.toString());

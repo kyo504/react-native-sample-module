@@ -26,21 +26,18 @@ RCT_EXPORT_MODULE();
 
 #pragma mark - Pubic API
 
-RCT_EXPORT_METHOD(play:(NSString *)url) {
+RCT_EXPORT_METHOD(play:(NSString *) url) {
     if(!([url length]>0)) return;
     
     NSURL *soundUrl = [[NSURL alloc] initWithString:url];
     self.playerItem = [AVPlayerItem playerItemWithURL:soundUrl];
     self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
     
-    soundUrl = nil;
-}
-
-RCT_EXPORT_METHOD(play) {
     [self.player play];
     
     [self.bridge.eventDispatcher sendDeviceEventWithName: @"onPlaybackStateChanged"
                                                     body: @{@"state": @"PLAYING" }];
+    soundUrl = nil;
 }
 
 RCT_EXPORT_METHOD(pause) {
@@ -49,3 +46,5 @@ RCT_EXPORT_METHOD(pause) {
     [self.bridge.eventDispatcher sendDeviceEventWithName: @"onPlaybackStateChanged"
                                                     body: @{@"state": @"PAUSED" }];
 }
+
+@end
