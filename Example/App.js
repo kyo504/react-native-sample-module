@@ -44,7 +44,7 @@ export default class Example extends Component {
   onPlay() {
     Player.isPlaying((event) => {
       if (!event.playing) {
-        Player.play("https://api.soundcloud.com/tracks/302064339/stream?client_id=3ed8237e8a4bfc63db818a732c95bc38");
+        Player.play("http://vprbbc.streamguys.net/vprbbc24-mobile.mp3");
       }
     })
   }
