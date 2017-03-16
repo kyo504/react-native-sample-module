@@ -63,7 +63,9 @@ public class RNAudioPlayerModule extends ReactContextBaseJavaModule implements M
 
     @ReactMethod
     public void isPlaying(Callback cb) {
-        cb.invoke(mMediaPlayer.isPlaying());
+        WritableMap params = Arguments.createMap();
+        params.putBoolean("playing", mMediaPlayer.isPlaying());
+        cb.invoke(params);
     }
 
     @Override

@@ -47,4 +47,17 @@ RCT_EXPORT_METHOD(pause) {
                                                     body: @{@"state": @"PAUSED" }];
 }
 
+RCT_EXPORT_METHOD(isPlaying:(RCTResponseSenderBlock) callback)
+{
+    NSMutableDictionary *events = [[NSMutableDictionary alloc] init];
+
+    if (self.player != nil && self.player.rate != 0) {
+        events[@"playing"] = @YES;
+    } else {
+        events[@"playing"] = @NO;
+    }
+
+    callback(events]);
+}
+
 @end

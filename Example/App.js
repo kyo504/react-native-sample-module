@@ -42,11 +42,19 @@ export default class Example extends Component {
   }
 
   onPlay() {
-    Player.play("https://api.soundcloud.com/tracks/302064339/stream?client_id=3ed8237e8a4bfc63db818a732c95bc38");
+    Player.isPlaying((event) => {
+      if (!event.playing) {
+        Player.play("https://api.soundcloud.com/tracks/302064339/stream?client_id=3ed8237e8a4bfc63db818a732c95bc38");
+      }
+    })
   }
 
   onPause() {
-    Player.pause();
+    Player.isPlaying((event) => {
+      if (event.playing) {
+        Player.pause();
+      }
+    })
   }
 
   render() {
@@ -64,7 +72,7 @@ export default class Example extends Component {
             color='red'
           />
         </View>
-        <Text style={{color:'black', fontSize: 16}}>{this.state.playbackState}</Text>
+        <Text style={{ color: 'black', fontSize: 16 }}>{this.state.playbackState}</Text>
       </View>
     );
   }
